@@ -1,0 +1,22 @@
+{
+  "name": "stratego",
+  "version": "1.0.0",
+  "description": "a board state engine for the board game stratego",
+  "main": "engine.js",
+  "scripts": {
+    "compile": "babel --presets es2015 js --out-dir lib",
+    "start": "npm run compile && node lib/engine.js"
+  },
+  "keywords": [
+    "stratego",
+    "game"
+  ],
+  "author": "Matthew Carr",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "http-server": "^0.11.1"
+  }
+}
