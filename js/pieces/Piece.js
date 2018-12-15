@@ -1,8 +1,8 @@
 class Piece {
-    constructor(rank, name) {
+    constructor(rank=-5, name='', coordinate={}) {
         this.name = name;
         this.rank = rank;
-        this.location = ''; // board location of this piece, maybe a Coordinate class?
+        this.coord = coordinate;
     }
 
     getName() {
@@ -14,11 +14,11 @@ class Piece {
     }
 
     getLocation() {
-        return this.location;
+        return this.coord;
     }
 
-    setLocation(loc) {
-        this.location = loc;
+    setLocation(coord) {
+        this.coord = coord;
     }
 
     // logic for determining how this piece is able to move to this square legally. 

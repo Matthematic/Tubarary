@@ -1,8 +1,9 @@
 import Piece from './Piece';
+import { GENERAL } from './Ranks';
 
 class General extends Piece {
     constructor() {
-        super(9, 'General');
+        super(GENERAL, 'General');
     }
 }
 

@@ -1,8 +1,9 @@
 import Piece from './Piece';
+import { SPY } from './Ranks';
 
 class Spy extends Piece {
     constructor() {
-        super(1, 'Spy');
+        super(SPY, 'Spy');
     }
 
     // logic for determining how this piece is able to move

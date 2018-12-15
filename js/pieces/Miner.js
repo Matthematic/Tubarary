@@ -1,8 +1,9 @@
 import Piece from './Piece';
+import { MINER } from './Ranks';
 
 class Miner extends Piece {
     constructor() {
-        super(3, 'Miner');
+        super(MINER, 'Miner');
     }
 
     // logic for determining how this piece is able to move
