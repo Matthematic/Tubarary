@@ -1,10 +1,25 @@
+import chalk from 'chalk';
+
 export default class BoardPrinter {
     constructor(board) {
         this.board = board;
+        this.alphabet = {
+             0: 'A',
+             1: 'B',
+             2: 'C',
+             3: 'D',
+             4: 'E',
+             5: 'F',
+             6: 'G',
+             7: 'H',
+             8: 'I',
+             9: 'J'
+        };
     }
 
     printNames() {
         const longestChar = this.getLongestNameChar(this.board);
+        console.log('LONGEST CHAR', longestChar);
         let accum = '\n';
         for (let y = 0; y < this.board.length; ++y) {
             let row = '';
@@ -13,19 +28,29 @@ export default class BoardPrinter {
                 let diffLongestChar = longestChar - name.length;
                 let halfDiff = Math.ceil(diffLongestChar / 2);
                 let halfDiffStr = " ".repeat(halfDiff);
-                name = halfDiffStr + name + halfDiffStr;
+                name = `${halfDiffStr}${this.board[y][x].getOutputName()}${halfDiffStr}`;
                 row += ' | ' + name;
             }
 
-            row += ' |\n ' + "-".repeat(row.length+1) + '\n';
+            row += ' | ' + `${chalk.yellow(y+1)}` + '\n ' + "-".repeat(this.board[0].length * (longestChar + 3)) + '\n';
             accum += row;
         }
 
-        return accum + '\n';
+        let diffLongestChar = longestChar - 1; // letters are 1 char
+        let halfDiff = Math.ceil((diffLongestChar) / 2) + 1;
+        let halfDiffStr = " ".repeat(halfDiff);
+        let alphabetLabels = '  ';
+
+        for (let i = 0; i < this.board[0].length; ++i) {
+            alphabetLabels += halfDiffStr + ' ' + this.alphabet[i] + halfDiffStr;
+        }
+
+        return chalk.yellow(alphabetLabels) + '\n' + accum + '\n';
     }
 
     printRanks() {
         const longestChar = this.getLongestRankChar(this.board);
+        let rowLength = 0;
         let accum = '\n';
         for (let y = 0; y < this.board.length; ++y) {
             let row = '';
@@ -37,12 +62,11 @@ export default class BoardPrinter {
                 }
                 row += ' ' + name + ' ';
             }
-
             row += '\n';
             accum += row;
         }
 
-        return accum + '\n';
+        return chalk.blue(accum) + '\n';
     }
 
     getLongestNameChar(board) {

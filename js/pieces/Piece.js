@@ -1,30 +1,33 @@
 class Piece {
-    constructor(rank=-5, name='', coordinate={}) {
+    constructor(rank=-5, name='') {
         this.name = name;
         this.rank = rank;
-        this.coord = coordinate;
+        this.outputName = name;
     }
 
     getName() {
         return this.name;
     }
 
+    getOutputName() {
+        return this.outputName;
+    }
+
     getRank() {
         return this.rank;
     }
 
-    getLocation() {
-        return this.coord;
-    }
-
-    setLocation(coord) {
-        this.coord = coord;
-    }
-
     // logic for determining how this piece is able to move to this square legally. 
     // This does not determine if the square is empty or not. That check is made by the board manager
-    isValidMove(square) {
+    isValidMove(coord1, coord2) {
+        if ((Math.abs(coord2.x - coord1.x) + Math.abs(coord2.y - coord1.y)) == 1) {
+            return true
+        }
+        return false;
+    }
 
+    setOutputName(name) {
+        this.outputName = name;
     }
 
     // logic for determining what happens when this piece attacks.

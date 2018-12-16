@@ -12,6 +12,10 @@ import Sergeant from './pieces/Sergeant';
 import Spy from './pieces/Spy';
 import prompt from 'prompt';
 import Board from './board/Board';
+import Player from './player/Player';
+
+let player1 = new Player();
+let player2 = new Player();
 
 let marshal = new Marshal();
 let bomb = new Bomb();
@@ -26,20 +30,58 @@ let scout = new Scout();
 let sergeant = new Sergeant();
 let spy = new Spy();
 
-let board = new Board();
+player1.load(marshal, bomb, captain, colonel, flag, general, lieutenant, major, miner, scout, sergeant, spy);
+player1.setColor('red');
 
-console.log(marshal.getName(), marshal.getRank());
-console.log(general.getName(), general.getRank());
-console.log(colonel.getName(), colonel.getRank());
-console.log(major.getName(), major.getRank());
-console.log(captain.getName(), captain.getRank());
-console.log(lieutenant.getName(), lieutenant.getRank());
-console.log(sergeant.getName(), sergeant.getRank());
-console.log(miner.getName(), miner.getRank());
-console.log(scout.getName(), scout.getRank());
-console.log(spy.getName(), spy.getRank());
-console.log(bomb.getName(), bomb.getRank());
-console.log(flag.getName(), flag.getRank());
+let marshal2 = new Marshal();
+let general2 = new General();
+let colonel2_1 = new Colonel();
+let colonel2_2 = new Colonel();
+let major2_1 = new Major();
+let major2_2= new Major();
+let major2_3 = new Major();
+let captain2_1 = new Captain();
+let captain2_2 = new Captain();
+let captain2_3 = new Captain();
+let captain2_4 = new Captain();
+let lieutenant2_1 = new Lieutenant();
+let lieutenant2_2 = new Lieutenant();
+let lieutenant2_3 = new Lieutenant();
+let lieutenant2_4 = new Lieutenant();
+let sergeant2_1 = new Sergeant();
+let sergeant2_2 = new Sergeant();
+let sergeant2_3 = new Sergeant();
+let sergeant2_4 = new Sergeant();
+let sergeant2_5 = new Sergeant();
+let miner2_1 = new Miner();
+let miner2_2 = new Miner();
+let miner2_3 = new Miner();
+let miner2_4 = new Miner();
+let miner2_5 = new Miner();
+let scout2_1 = new Scout();
+let scout2_2 = new Scout();
+let scout2_3 = new Scout();
+let scout2_4 = new Scout();
+let scout2_5 = new Scout();
+let scout2_6 = new Scout();
+let bomb2_1 = new Bomb();
+let bomb2_2 = new Bomb();
+let bomb2_3 = new Bomb();
+let bomb2_4 = new Bomb();
+let bomb2_5 = new Bomb();
+let bomb2_6 = new Bomb();
+let flag2 = new Flag();
+let spy2 = new Spy();
+
+player2.load(marshal2, general2, colonel2_1, colonel2_2, major2_1, major2_2, major2_3,
+    lieutenant2_1, lieutenant2_2, lieutenant2_3, lieutenant2_4, sergeant2_1, sergeant2_2, sergeant2_3, sergeant2_4, sergeant2_5,
+    miner2_1, miner2_2, miner2_3, miner2_4, miner2_5,
+    scout2_1, scout2_2, scout2_3, scout2_4, scout2_5, scout2_6,
+    bomb2_1, bomb2_2, bomb2_3, bomb2_4, bomb2_5, bomb2_6, flag2, spy2
+);
+player2.setColor('blue');
+
+let board = new Board();
 
 const Alphabet = {
     A: 0,
@@ -78,16 +120,27 @@ board.load({ x: 8, y: 0 }, scout);
 board.load({ x: 9, y: 0 }, major);
 
 // player 2
-board.load({ x: 0, y: 9 }, marshal);
-board.load({ x: 1, y: 9 }, scout);
-board.load({ x: 2, y: 9 }, flag);
-board.load({ x: 3, y: 9 }, bomb);
-board.load({ x: 4, y: 9 }, lieutenant);
-board.load({ x: 5, y: 9 }, miner);
-board.load({ x: 6, y: 9 }, general);
-board.load({ x: 7, y: 9 }, scout);
-board.load({ x: 8, y: 9 }, scout);
-board.load({ x: 9, y: 9 }, major);
+board.load({ x: 0, y: 9 }, marshal2);
+board.load({ x: 1, y: 9 }, scout2_4);
+board.load({ x: 2, y: 9 }, flag2);
+board.load({ x: 3, y: 9 }, bomb2_1);
+board.load({ x: 4, y: 9 }, lieutenant2_4);
+board.load({ x: 5, y: 9 }, miner2_1);
+board.load({ x: 6, y: 9 }, general2);
+board.load({ x: 7, y: 9 }, sergeant2_3);
+board.load({ x: 8, y: 9 }, bomb2_5);
+board.load({ x: 9, y: 9 }, major2_3);
+
+board.load({ x: 0, y: 8 }, colonel2_1);
+board.load({ x: 1, y: 8 }, scout2_3);
+board.load({ x: 2, y: 8 }, major2_1);
+board.load({ x: 3, y: 8 }, bomb2_6);
+board.load({ x: 4, y: 8 }, lieutenant2_2);
+board.load({ x: 5, y: 8 }, miner2_2);
+board.load({ x: 6, y: 8 }, lieutenant2_3);
+board.load({ x: 7, y: 8 }, scout2_1);
+board.load({ x: 8, y: 8 }, scout2_2);
+board.load({ x: 9, y: 8 }, sergeant2_2);
 
 function ask() {
     prompt.get(['move'], function(err, result) {
@@ -96,7 +149,6 @@ function ask() {
 
         if (command === 'exit') {
             console.log('Closing game.');
-            exitCondition = true;
         } else {
             let split = command.split(' ');
             console.log(split);
