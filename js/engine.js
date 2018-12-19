@@ -14,23 +14,56 @@ import prompt from 'prompt';
 import Board from './board/Board';
 import Player from './player/Player';
 
-let player1 = new Player();
-let player2 = new Player();
+let player1 = new Player("Player 1"); // TODO replace logic using player name with cuid
+let player2 = new Player("Player 2");
 
 let marshal = new Marshal();
-let bomb = new Bomb();
-let captain = new Captain();
-let colonel = new Colonel();
-let flag = new Flag();
 let general = new General();
-let lieutenant = new Lieutenant();
-let major = new Major();
-let miner = new Miner();
-let scout = new Scout();
-let sergeant = new Sergeant();
+let colonel1 = new Colonel();
+let colonel2 = new Colonel();
+let major1 = new Major();
+let major2= new Major();
+let major3 = new Major();
+let captain1 = new Captain();
+let captain2 = new Captain();
+let captain3 = new Captain();
+let captain4 = new Captain();
+let lieutenant1 = new Lieutenant();
+let lieutenant2 = new Lieutenant();
+let lieutenant3 = new Lieutenant();
+let lieutenant4 = new Lieutenant();
+let sergeant1 = new Sergeant();
+let sergeant2 = new Sergeant();
+let sergeant3 = new Sergeant();
+let sergeant4 = new Sergeant();
+let sergeant5 = new Sergeant();
+let miner1 = new Miner();
+let miner2 = new Miner();
+let miner3 = new Miner();
+let miner4 = new Miner();
+let miner5 = new Miner();
+let scout1 = new Scout();
+let scout2 = new Scout();
+let scout3 = new Scout();
+let scout4 = new Scout();
+let scout5 = new Scout();
+let scout6 = new Scout();
+let bomb1 = new Bomb();
+let bomb2 = new Bomb();
+let bomb3 = new Bomb();
+let bomb4 = new Bomb();
+let bomb5 = new Bomb();
+let bomb6 = new Bomb();
+let flag = new Flag();
 let spy = new Spy();
 
-player1.load(marshal, bomb, captain, colonel, flag, general, lieutenant, major, miner, scout, sergeant, spy);
+//player1.load(marshal, bomb, captain, colonel, flag, general, lieutenant, major, miner, scout, sergeant, spy);
+player1.load(marshal, general, colonel1, colonel2, major1, major2, major3,
+    lieutenant1, lieutenant2, lieutenant3, lieutenant4, sergeant1, sergeant2, sergeant3, sergeant4, sergeant5,
+    miner1, miner2, miner3, miner4, miner5,
+    scout1, scout2, scout3, scout4, scout5, scout6,
+    bomb1, bomb2, bomb3, bomb4, bomb5, bomb6, flag, spy
+);
 player1.setColor('red');
 
 let marshal2 = new Marshal();
@@ -108,6 +141,9 @@ const Alphabet = {
 }
 
 // player 1
+player1.placeRandom(board, 'top');
+player2.placeRandom(board, 'bot');
+/*
 board.load({ x: 0, y: 0 }, marshal);
 board.load({ x: 1, y: 0 }, scout);
 board.load({ x: 2, y: 0 }, flag);
@@ -141,6 +177,7 @@ board.load({ x: 6, y: 8 }, lieutenant2_3);
 board.load({ x: 7, y: 8 }, scout2_1);
 board.load({ x: 8, y: 8 }, scout2_2);
 board.load({ x: 9, y: 8 }, sergeant2_2);
+*/
 
 function ask() {
     prompt.get(['move'], function(err, result) {

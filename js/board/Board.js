@@ -1,8 +1,9 @@
 import BoardPrinter from './BoardPrinter';
 import chalk from 'chalk';
+import { FLAG } from '../pieces/Ranks';
 
-const O = { getRank: () => 0, getOutputName: () => '     ', getName: () => '     ', isValidMove: () => {}  }; // placeholder for an empty spot in the board
-const X = { getRank: () => 0, getOutputName: () => chalk.bgBlueBright('terrain'), getName: () => 'terrain', isValidMove: () => {} }; // placeholder for the terrain where no pieces can ever go
+const O = { getRank: () => 0, getPlayer: () => 'empty', getOutputName: () => '     ', getName: () => '     ', isValidMove: () => {}  }; // placeholder for an empty spot in the board
+const X = { getRank: () => 0, getPlayer: () => 'terrain', getOutputName: () => chalk.bgBlueBright('terrain'), getName: () => 'terrain', isValidMove: () => {} }; // placeholder for the terrain where no pieces can ever go
 
 export default class Board {
     constructor() {
@@ -11,7 +12,7 @@ export default class Board {
             [O, O, O, O, O, O, O, O, O, O],
             [O, O, O, O, O, O, O, O, O, O],
             [O, O, O, O, O, O, O, O, O, O],
-            [O, O, X, X, X, X, X, X, O, O],
+            [O, O, X, X, O, O, X, X, O, O],
             [O, O, X, X, O, O, X, X, O, O],
             [O, O, O, O, O, O, O, O, O, O],
             [O, O, O, O, O, O, O, O, O, O],
@@ -30,21 +31,32 @@ export default class Board {
         console.log("coord1", coord1, "coord2", coord2);
         const pieceCoord2 = this.getPiece(coord2);
         const pieceCoord1 = this.getPiece(coord1);
+        console.log("pieceCoord2", pieceCoord2);
 
-        if (pieceCoord1 && pieceCoord1.isValidMove(coord1, coord2)) {
-            if (pieceCoord2.getRank() < pieceCoord1.getRank()) {
-                if (this.load(coord2, pieceCoord1)) {
-                    this.load(coord1, O); // empty the coord we came from
+        if (pieceCoord1 && pieceCoord2 && pieceCoord1.isValidMove(coord1, coord2)) { // if this is a valid move for the piece
+            if (pieceCoord1.getPlayer() !== pieceCoord2.getPlayer()) { // if it's not the same player
+
+                if (pieceCoord2.getRank() === FLAG) {
+                    console.log("GAME OVER", pieceCoord1.getPlayer(), "WINS!");
+                    process.exit();
+                }
+                if (pieceCoord2.getRank() < pieceCoord1.getRank()) {
+                    if (this.load(coord2, pieceCoord1)) {
+                        this.load(coord1, O); // empty the coord we came from
+                    }
+                }
+                else if (pieceCoord1.getRank() < pieceCoord2.getRank()) {
+                    if (this.load(coord2, pieceCoord2)) {
+                        this.load(coord1, O); // empty the coord we came from
+                    }
+                }
+                else { // they are equal, destroy both
+                    this.load(coord2, O);
+                    this.load(coord1, O);
                 }
             }
-            else if (pieceCoord1.getRank() < pieceCoord2.getRank()) {
-                if (this.load(coord2, pieceCoord2)) {
-                    this.load(coord1, O); // empty the coord we came from
-                }
-            }
-            else { // they are equal, destroy both
-                this.load(coord2, O);
-                this.load(coord1, O);
+            else {
+                console.error("YOU ARE ATTACKING YOUR OWN PIECE");
             }
         }
         else {
